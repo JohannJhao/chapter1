@@ -6,13 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 //lombok 可以省略 getter和setter
 @Data
-
 @Entity
-public class User {
-
+public class User implements Serializable {
+    private static final long serialVersionUID = -1L;
     @Id
     @GeneratedValue
     private Long id;
