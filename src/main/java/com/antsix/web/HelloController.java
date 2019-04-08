@@ -1,6 +1,7 @@
 package com.antsix.web;
 
 
+import com.antsix.common.exception.MyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,9 @@ public class HelloController {
 
     @ResponseBody
     @RequestMapping("/hello")
-    public String hello() {
-        return "Hello World";
+    public String hello()  throws Exception {
+        throw new Exception("发生错误");
+        //return "Hello World";
     }
 
     @RequestMapping("/")
@@ -33,5 +35,8 @@ public class HelloController {
         // return模板文件的名称，对应src/main/resources/templates/index.html
         return "index";
     }
-
+    @RequestMapping("/json")
+    public String json() throws MyException {
+        throw new MyException("发生错误2");
+    }
 }

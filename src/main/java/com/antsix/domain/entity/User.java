@@ -28,6 +28,12 @@ public class User implements Serializable {
         this.name = name;
         this.age = age;
     }
+
+    public User(Long id,String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
     // 省略setter和getter
 
 }

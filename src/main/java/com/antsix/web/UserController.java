@@ -24,14 +24,18 @@ public class UserController {
         return r;
     }
 
-    @ApiOperation(value = "创建用户",notes = "注意别出错")
-    @ApiImplicitParam(name = "user",value = "用户详细实体user",required = true,dataType = "User")
-    @ApiResponses({
-            @ApiResponse(code=400,message="请求参数没填好"),
-            @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
-    })
+//    @ApiOperation(value = "创建用户",notes = "注意别出错")
+//    @ApiImplicitParam(name = "user",value = "用户详细实体user",required = true,dataType = "User")
+//    @ApiResponses({
+//            @ApiResponse(code=400,message="请求参数没填好"),
+//            @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
+//    })
+//    @RequestMapping(value="", method=RequestMethod.POST)
+
+    @ApiOperation(value="创建用户", notes="根据User对象创建用户")
+    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value="", method=RequestMethod.POST)
-    public String postUser(@ModelAttribute User user) {
+    public String postUser(@RequestBody User user) {
         // 处理"/users/"的POST请求，用来创建User
         // 除了@ModelAttribute绑定参数之外，还可以通过@RequestParam从页面中传递参数
         users.put(user.getId(), user);
@@ -54,17 +58,24 @@ public class UserController {
     }
 
 
-    @ApiOperation(value="更新用户详细信息", notes="注意别出错")
+//    @ApiOperation(value="更新用户详细信息", notes="注意别出错")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long"),
+//            @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
+//    })
+//    @ApiResponses({
+//            @ApiResponse(code=400,message="请求参数没填好"),
+//            @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
+//    })
+//    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+
+    @ApiOperation(value="更新用户详细信息", notes="根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path"),
             @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     })
-    @ApiResponses({
-            @ApiResponse(code=400,message="请求参数没填好"),
-            @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
-    })
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public String putUser(@PathVariable Long id, @ModelAttribute User user) {
+    public String putUser(@PathVariable Long id, @RequestBody User user) {
         // 处理"/users/{id}"的PUT请求，用来更新User信息
         User u = users.get(id);
         u.setName(user.getName());
@@ -75,7 +86,7 @@ public class UserController {
     }
 
     @ApiOperation(value="删除用户", notes="注意别出错")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @ApiResponses({
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
