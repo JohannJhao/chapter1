@@ -1,5 +1,6 @@
 package com.antsix;
 
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -14,7 +15,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 public class Chapter1Application {
 
+	//private static Logger logger = LogManager.getLogger(Chapter1Application.class.getName());
+	private static Logger logger = Logger.getLogger(Chapter1Application.class.getName());
 	public static void main(String[] args) {
+		logger.info("### INFO Chapter1Application RUNNING ！！！！！！");
+		logger.error("### ERROR Chapter1Application RUNNING ！！！！！！");
 		SpringApplication.run(Chapter1Application.class, args);
 	}
 

@@ -14,7 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 public class SpringBootMongoTest {
 
-    private static final Logger logger = Logger.getLogger(SpringBootTest.class);
+    //private static final Logger logger = LogManager.getLogger(SpringBootTest.class);
+    private static final Logger logger = Logger.getLogger(SpringBootTest.class.getName());
 
     @Autowired
     private UserMongoRepository userMongoRepository;

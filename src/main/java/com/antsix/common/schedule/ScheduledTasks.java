@@ -1,5 +1,6 @@
 package com.antsix.common.schedule;
 
+
 import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,8 @@ import java.util.Date;
 @Component
 public class ScheduledTasks {
 
-    private static Logger log = Logger.getLogger(ScheduledTasks.class);
+    //private static Logger log = LogManager.getLogger(ScheduledTasks.class.getName());
+    private static Logger log = Logger.getLogger(ScheduledTasks.class.getName());
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     /**
@@ -24,6 +26,6 @@ public class ScheduledTasks {
      */
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-        log.info("The time is now : "+dateFormat.format(new Date()));
+        log.debug("The time is now : "+dateFormat.format(new Date()));
     }
 }
