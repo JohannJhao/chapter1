@@ -5,6 +5,7 @@ import com.antsix.common.exception.MyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -26,6 +27,12 @@ public class HelloController {
     public String hello()  throws Exception {
         throw new Exception("发生错误");
         //return "Hello World";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/hello1",method = RequestMethod.GET)
+    public String hello1(String name) {
+        return "Hello "+name;
     }
 
     @RequestMapping("/")
