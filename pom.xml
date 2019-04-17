@@ -119,6 +119,13 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
+		<!-- 引入MongoDB 驱动，用于日志写入MongoDB。 spring-boot-starter-data-mongodb 中包含该依赖-->
+		<!--<dependency>-->
+			<!--<groupId>org.mongodb</groupId>-->
+			<!--<artifactId>mongodb-driver</artifactId>-->
+			<!--<version>3.4.3</version>-->
+		<!--</dependency>-->
+
 	</dependencies>
 
 	<build>
