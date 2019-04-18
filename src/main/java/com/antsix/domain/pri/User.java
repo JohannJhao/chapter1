@@ -17,7 +17,7 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 4)
     private String name;
 
     @Column(nullable = false)

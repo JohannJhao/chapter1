@@ -19,7 +19,7 @@ public class Message {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 15)
     private String content;
 
     public Message(){}

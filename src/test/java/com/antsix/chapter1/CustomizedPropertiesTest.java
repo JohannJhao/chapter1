@@ -4,7 +4,7 @@ package com.antsix.chapter1;
  * 自定义属性测试
  */
 
-import com.antsix.domain.entity.CustomizedProperties;
+import com.antsix.config.CustomizedProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
