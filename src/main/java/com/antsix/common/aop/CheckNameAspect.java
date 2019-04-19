@@ -29,12 +29,12 @@ public class CheckNameAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         logger.info("[ IP ] : "+request.getRemoteAddr()+" Check Name !!! "+"[ ARGS ] : "+ Arrays.toString(joinPoint.getArgs()));
-        if(!Arrays.toString(joinPoint.getArgs()).contains("ZHAO")){
-            logger.error(" ####### Exception !!! ");
-            throw new Exception("参数值发生错误");
-        }else {
-            logger.error("[ Check Name ] : Pass ");
-        }
+//        if(!Arrays.toString(joinPoint.getArgs()).contains("ZHAO")){
+//            logger.error(" ####### Exception !!! ");
+//            throw new Exception("参数值发生错误");
+//        }else {
+//            logger.error("[ Check Name ] : Pass ");
+//        }
     }
 
     @AfterReturning(returning = "ret",pointcut = "checkName()")

@@ -22,11 +22,12 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 public class HelloController {
 
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/hello")
     public String hello()  throws Exception {
-        throw new Exception("发生错误");
+        //throw new Exception("发生错误");
         //return "Hello World";
+        return "hello";
     }
 
     @ResponseBody
@@ -45,5 +46,15 @@ public class HelloController {
     @RequestMapping("/json")
     public String json() throws MyException {
         throw new MyException("发生错误2");
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping("/home")
+    public String home() {
+        return "index";
     }
 }
