@@ -48,6 +48,12 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+		<!-- 添加freemarker模板 依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<!-- 省略getter，setter -->
 		<dependency>
@@ -136,10 +142,11 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
+		<!-- Velocity模板，新版的SpringBoot已经弃用该模板发送邮件了，故不推荐使用-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-velocity</artifactId>
-			<version>1.3.2.RELEASE</version>
+			<version>1.4.7.RELEASE</version>
 		</dependency>
 
 	</dependencies>
