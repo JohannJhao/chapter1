@@ -10,9 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -69,10 +66,11 @@ public class MultiSourceSpringJpaTest {
 
 
     @Test
-    @Transactional(value="transactionManagerSecondary",isolation = Isolation.DEFAULT,propagation = Propagation.REQUIRED)
+    //@Transactional(value="transactionManagerSecondary",isolation = Isolation.DEFAULT,propagation = Propagation.REQUIRED)
     public void test() throws Exception {
 
         userRepository.deleteAll();
+        messageRepository.deleteAll();
         userRepository.save(new User("aaa", 10));
         userRepository.save(new User("bbb", 20));
         userRepository.save(new User("ccc", 30));
@@ -81,7 +79,7 @@ public class MultiSourceSpringJpaTest {
 
         //Assert.assertEquals(5, userRepository.findAll().size());
 
-        messageRepository.deleteAll();
+
         messageRepository.save(new Message("o1", "aaaaaaaaaa"));
         messageRepository.save(new Message("o2", "bbbbbbbbbb"));
         messageRepository.save(new Message("o3", "cccccccccc"));
@@ -89,5 +87,4 @@ public class MultiSourceSpringJpaTest {
         //Assert.assertEquals(3, messageRepository.findAll().size());
 
     }
-
 }
