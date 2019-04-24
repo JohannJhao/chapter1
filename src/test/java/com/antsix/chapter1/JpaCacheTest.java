@@ -47,12 +47,14 @@ public class JpaCacheTest {
      */
 
     @Test
-    public void test() throws Exception {
+    public void ehcacheTest() throws Exception {
         User u1 = userRepository.findByName("AAA");
         System.out.println("第一次查询：" + u1.getAge());
 
         User u2 = userRepository.findByName("AAA");
         System.out.println("第二次查询：" + u2.getAge());
+
+        System.out.println("u1==u2 "+(u1==u2));
 
         u1.setAge(20);
         userRepository.save(u1);
@@ -62,4 +64,65 @@ public class JpaCacheTest {
         User u4 = userRepository.findByName("AAA");
         System.out.println("第四次查询：" + u4.getAge());
     }
+
+    @Test
+    public void redisCacheTest(){
+        User u1 = userRepository.findByName("AAA");
+        System.out.println("第一次查询：" + u1.getAge());
+
+        User u2 = userRepository.findByName("AAA");
+        System.out.println("第二次查询：" + u2.getAge());
+
+        System.out.println("u1==u2 "+(u1==u2));
+
+        u1.setAge(20);
+        userRepository.save(u1);
+        User u3 = userRepository.findByName("AAA");
+        System.out.println("第三次查询：" + u3.getAge());
+
+        User u4 = userRepository.findByName("AAA");
+        System.out.println("第四次查询：" + u4.getAge());
+    }
+    /**
+     * 查询结果异常：
+     * Hibernate: insert into user (age, name) values (?, ?)
+     * 第一次查询：10
+     * 第二次查询：10
+     * Hibernate: select user0_.id as id1_0_0_, user0_.age as age2_0_0_, user0_.name as name3_0_0_ from user user0_ where user0_.id=?
+     * Hibernate: update user set age=?, name=? where id=?
+     * 第三次查询：10
+     * 第四次查询：10
+     *
+     * 原因：
+     * 在EhCache缓存时没有问题，主要是由于EhCache是进程内的缓存框架，第一次通过select查询出的结果被加入到EhCache缓存中，
+     * 第二次查询从EhCache取出的对象与第一次查询对象实际上是同一个对象（可以在使用Chapter4-4-1工程中，观察u1==u2来看看是否是同一个对象），
+     * 因此我们在更新age的时候，实际已经更新了EhCache中的缓存对象。
+     *
+     * 而Redis的缓存独立存在于我们的Spring应用之外，我们对数据库中数据做了更新操作之后，没有通知Redis去更新相应的内容，
+     * 因此我们取到了缓存中未修改的数据，导致了数据库与缓存中数据的不一致。
+     * 因此我们在使用缓存的时候，要注意缓存的生命周期，利用好上一篇上提到的几个注解来做好缓存的更新、删除
+     *
+     * 通过@CachePut来让数据更新操作同步到缓存中
+     * @CachePut(key = "#p0.name")
+     *     User save(User user);
+     *
+     */
+
+
+
+
+    /**
+     * 做redis缓存，将resources包下的ehcache.xml删除
+     * ehcache.xml
+     * <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     *          xsi:noNamespaceSchemaLocation="ehcache.xsd">
+     *
+     *     <cache name="users"
+     *            maxEntriesLocalHeap="200"
+     *            timeToLiveSeconds="10">
+     *     </cache>
+     *
+     * </ehcache>
+     */
+
 }
