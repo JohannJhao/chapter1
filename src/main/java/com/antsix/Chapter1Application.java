@@ -13,7 +13,10 @@ import org.springframework.cache.annotation.EnableCaching;
 public class Chapter1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Chapter1Application.class, args);
+		SpringApplication springApplication = new SpringApplication(Chapter1Application.class);
+		//Banner.Mode.OFF 关闭
+		//springApplication.setBannerMode(Banner.Mode.OFF);
+		springApplication.run(args);
 	}
 
 }
